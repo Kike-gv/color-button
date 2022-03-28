@@ -29,33 +29,58 @@ test("initial conditions", () => {
   const checkbox = screen.getByRole("checkbox");
   expect(checkbox).not.toBeChecked();
 
-  
   //expect button to be disabled when checkbox is enabled
   fireEvent.click(checkbox);
   expect(colorButton).toBeDisabled();
-  
+
   //expect button to be enabled when checkbox is disabled
   fireEvent.click(checkbox);
   expect(colorButton).toBeEnabled();
-
 });
-
-
 
 test("interaction sequence between checkbox and button", () => {
   render(<App />);
 
   const colorButton = screen.getByRole("button", { name: "Change to blue" });
-  const checkbox = screen.getByRole("checkbox");
+  const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 
-  
   //expect button to be disabled when checkbox is enabled
   fireEvent.click(checkbox);
   expect(colorButton).toBeDisabled();
-  
+
   //expect button to be enabled when checkbox is disabled
   fireEvent.click(checkbox);
   expect(colorButton).toBeEnabled();
+});
+
+test("Code Quiz! Button Gray when Disabled", () => {
+  render(<App />);
+
+  const colorButton = screen.getByRole("button", { name: "Change to blue" });
+  const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
+
+  //expect button to be disabled when checkbox is enabled
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeDisabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: "gray" });
+
+  //expect button to be enabled when checkbox is disabled
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: "red" });
+
+  //expect button to change color to blue on click
+  fireEvent.click(colorButton);
+  expect(colorButton).toHaveStyle({ backgroundColor: "blue" });
+
+  //expect button to be disabled when checkbox is enabled again
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeDisabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: "gray" });
+
+  //expect button to have color changed
+  fireEvent.click(checkbox);
+  expect(colorButton).toHaveStyle({ backgroundColor: "blue" });
 
 
 });
