@@ -7,7 +7,9 @@ describe("Button and checkbox tests", () => {
   const color2 = "MidnightBlue";
   test("button has correct initial color and name", () => {
     render(<App />);
-    const colorButton = screen.getByRole("button", { name: `Change to ${replaceCamelCaseWithSpaces(color2)}` });
+    const colorButton = screen.getByRole("button", {
+      name: `Change to ${replaceCamelCaseWithSpaces(color2)}`,
+    });
 
     //expect the initial name and color
     expect(colorButton).toHaveStyle({ backgroundColor: color1 });
@@ -19,14 +21,18 @@ describe("Button and checkbox tests", () => {
     expect(colorButton).toHaveStyle({ backgroundColor: color2 });
 
     //expect the text to be Change to ${color1}
-    expect(colorButton.textContent).toBe(`Change to ${replaceCamelCaseWithSpaces(color1)}`);
+    expect(colorButton).toHaveTextContent(
+      `Change to ${replaceCamelCaseWithSpaces(color1)}`
+    );
   });
 
   test("initial conditions", () => {
     render(<App />);
 
     //check button start enabled
-    const colorButton = screen.getByRole("button", { name: `Change to ${replaceCamelCaseWithSpaces(color2)}` });
+    const colorButton = screen.getByRole("button", {
+      name: `Change to ${replaceCamelCaseWithSpaces(color2)}`,
+    });
     expect(colorButton).toBeEnabled();
 
     //check checkbox starts unchecked
@@ -45,7 +51,9 @@ describe("Button and checkbox tests", () => {
   test("interaction sequence between checkbox and button", () => {
     render(<App />);
 
-    const colorButton = screen.getByRole("button", { name: `Change to ${replaceCamelCaseWithSpaces(color2)}` });
+    const colorButton = screen.getByRole("button", {
+      name: `Change to ${replaceCamelCaseWithSpaces(color2)}`,
+    });
     const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 
     //expect button to be disabled when checkbox is enabled
@@ -60,7 +68,9 @@ describe("Button and checkbox tests", () => {
   test("Code Quiz! Button Gray when Disabled", () => {
     render(<App />);
 
-    const colorButton = screen.getByRole("button", { name: `Change to ${replaceCamelCaseWithSpaces(color2)}` });
+    const colorButton = screen.getByRole("button", {
+      name: `Change to ${replaceCamelCaseWithSpaces(color2)}`,
+    });
     const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 
     //expect button to be disabled when checkbox is enabled
