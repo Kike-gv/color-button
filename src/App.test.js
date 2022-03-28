@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
+import { replaceCamelCaseWithSpaces } from "./App";
 
 test("button has correct initial color and name", () => {
   render(<App />);
@@ -81,6 +82,20 @@ test("Code Quiz! Button Gray when Disabled", () => {
   //expect button to have color changed
   fireEvent.click(checkbox);
   expect(colorButton).toHaveStyle({ backgroundColor: "blue" });
+});
 
+describe("spaces before came-casel capital letters", () => {
+  test("Works for no inner capital letter", () => {
+    expect(replaceCamelCaseWithSpaces("Red")).toBe("Red");
+  });
 
+  test("Works for one inner capital letter", () => {
+    expect(replaceCamelCaseWithSpaces("MidnightBlue")).toBe("Midnight Blue");
+  });
+
+  test("Works for multiple capital letters", () => {
+    expect(replaceCamelCaseWithSpaces("MediumVioletRed")).toBe(
+      "Medium Violet Red"
+    );
+  });
 });
